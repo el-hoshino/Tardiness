@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-typealias DisplayToastAction = @MainActor (String) -> Void
+public typealias DisplayToastAction = @MainActor (String) -> Void
 
-struct DisplayToastKey: EnvironmentKey {
-    static var defaultValue: DisplayToastAction? = nil
+public struct DisplayToastKey: EnvironmentKey {
+    public static var defaultValue: DisplayToastAction? = nil
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var displayToast: DisplayToastAction? {
         get { self[DisplayToastKey.self] }
         set { self[DisplayToastKey.self] = newValue }
