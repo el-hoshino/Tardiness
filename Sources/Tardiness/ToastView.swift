@@ -35,3 +35,27 @@ struct ToastView: View {
         }
     }
 }
+
+public extension View {
+    func displayToast(handledBy toastHandler: ToastHandler) -> some View {
+        self.displayToast(on: .top, handledBy: toastHandler, toastMaker: { ToastView(toastHandler: $0) })
+    }
+}
+
+#Preview {
+    struct ToastDemo: View {
+        @Environment(\.displayToast) var displayToast: DisplayToastAction?
+        var body: some View {
+            Text("Show Toast!")
+                .onTapGesture {
+                    displayToast?("sample")
+                    displayToast?("sample2")
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxHeight: .infinity, alignment: .center)
+        }
+    }
+    let toastHandler: ToastHandler = ToastHandler()
+    return ToastDemo()
+        .displayToast(handledBy: toastHandler)
+}
