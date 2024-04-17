@@ -28,7 +28,7 @@ An easy-to-use toast displayer & handler made specifically for SwiftUI
 
 1. Navigate to your Project settings
 2. Select Package Dependencies tab
-3. Add this repository's url as a Package Collection
+3. Add this repository's url in searchbar on top right
 
 ## Usage
 
