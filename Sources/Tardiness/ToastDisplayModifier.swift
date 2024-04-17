@@ -8,21 +8,32 @@
 import SwiftUI
 
 public struct ToastDisplayModifier<Toast: View>: ViewModifier {
+    var alignment: Alignment
     var toastHandler: ToastHandler
-    var toast: Toast
+    var toastMaker: (ToastHandler) -> Toast
 
     public func body(content: Content) -> some View {
         content
-            .overlay(alignment: .top) {
-                toast
+            .overlay(alignment: alignment) {
+                toastMaker(toastHandler)
             }
             .environment(\.displayToast, toastHandler.queueMessage(_:))
     }
 }
 
 public extension View {
-    func displayToast<Toast: View>(handledBy toastHandler: ToastHandler, body: Toast) -> some View {
-        self.modifier(ToastDisplayModifier(toastHandler: toastHandler, toast: body))
+    func displayToast<Toast: View>(
+        on alignment: Alignment,
+        handledBy toastHandler: ToastHandler,
+        toastMaker: @escaping (ToastHandler) -> Toast
+    ) -> some View {
+        self.modifier(
+            ToastDisplayModifier(
+                alignment: alignment,
+                toastHandler: toastHandler,
+                toastMaker: toastMaker
+            )
+        )
     }
     func displayToast(handledBy toastHandler: ToastHandler) -> some View {
         self.displayToast(handledBy: toastHandler, body: ToastView(toastHandler: toastHandler))
