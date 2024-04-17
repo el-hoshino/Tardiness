@@ -38,7 +38,11 @@ struct ToastView: View {
 
 public extension View {
     func displayToast(handledBy toastHandler: ToastHandler) -> some View {
-        self.displayToast(on: .top, handledBy: toastHandler, toastMaker: { ToastView(toastHandler: $0) })
+        self.displayToast(
+            on: .top,
+            handledBy: toastHandler,
+            toastMaker: { ToastView(toastHandler: $0) }
+        )
     }
 }
 
