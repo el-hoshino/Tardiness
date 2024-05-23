@@ -2,6 +2,33 @@
     
 An easy-to-use toast displayer & handler made specifically for SwiftUI
 
+## Why Tardiness
+
+You may want to notify the user with a simple message. This notification does not require any action from the user, so you don't want to block the user's current operation. What do you do in this case?
+
+Maybe you'll choose to use an `Alert`. However, `Alert`s have a fatal flaw: they block the user's operation.
+
+Then you might choose to use `UNNotification`. This is indeed an iOS-like notification method, but it is very cumbersome to implement in order to display it within the app, and above all, the notification banner itself is too large and can easily interfere with the user's operation.
+
+Actually, Android has a very useful standard component: `Toast`. This is used to display a message on the screen for a short time without blocking the user's operation.
+
+Unfortunately, iOS does not have such a standard component. That's where this library comes in. Tardiness is a library for easily displaying Toast in SwiftUI.
+
+### Demo Example
+
+```swift
+List {
+    // ...
+}
+.refreshable {
+    displayToast?("Refreshed!")
+}
+```
+
+### Execution Result
+
+![Tardiness Demo](README_Resources/Demo.gif)
+
 ## Installation
 
 ### Swift Package Manager
@@ -33,6 +60,8 @@ An easy-to-use toast displayer & handler made specifically for SwiftUI
 ## Usage
 
 Tips: You can also check for some examples in the Examples folder.
+
+### Basic Usage
 
 1. Import the package in your file
 
@@ -83,7 +112,7 @@ Tips: You can also check for some examples in the Examples folder.
     }
     ```
 
-## Usage with Custom Toast View
+### Custom Toast View
 
 The instruction above shows how to use the default toast view. If you wish to use a custom toast view, you can do so by providing a custom view in the `displayToast` modifier.
 
