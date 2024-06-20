@@ -21,7 +21,7 @@ List {
     // ...
 }
 .refreshable {
-    displayToast?("Refreshed!")
+    displayToast("Refreshed!")
 }
 ```
 
@@ -106,7 +106,7 @@ Tips: You can also check for some examples in the Examples folder.
 
         var body: some View {
             Button("Show Toast") {
-                displayToast?("Hello, World!")
+                displayToast("Hello, World!")
             }
         }
     }
