@@ -19,7 +19,7 @@ struct ChildView: View {
         }
         .refreshable {
             try? await Task.sleep(for: .seconds(2))
-            displayToast?("Refreshed!")
+            displayToast("Refreshed!")
         }
         
     }
