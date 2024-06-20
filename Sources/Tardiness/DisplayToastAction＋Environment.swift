@@ -40,11 +40,12 @@ extension DisplayToastAction {
 }
 
 public struct DisplayToastKey: EnvironmentKey {
-    public static var defaultValue: DisplayToastAction? = nil
+    @MainActor
+    public static var defaultValue: DisplayToastAction = .dummy()
 }
 
 public extension EnvironmentValues {
-    var displayToast: DisplayToastAction? {
+    var displayToast: DisplayToastAction {
         get { self[DisplayToastKey.self] }
         set { self[DisplayToastKey.self] = newValue }
     }
