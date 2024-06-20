@@ -48,12 +48,12 @@ public extension View {
 
 #Preview {
     struct ToastDemo: View {
-        @Environment(\.displayToast) var displayToast: DisplayToastAction?
+        @Environment(\.displayToast) var displayToast: DisplayToastAction
         var body: some View {
             Text("Show Toast!")
                 .onTapGesture {
-                    displayToast?("sample")
-                    displayToast?("sample2")
+                    displayToast("sample")
+                    displayToast("sample2")
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .frame(maxHeight: .infinity, alignment: .center)
