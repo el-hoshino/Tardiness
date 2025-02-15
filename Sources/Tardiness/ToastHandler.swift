@@ -8,11 +8,13 @@
 import Observation
 
 @Observable
-public final class ToastHandler {
+public final class ToastHandler: Sendable {
     @MainActor
-    public private (set) var currentToastMessage: String?
+    public private(set) var currentToastMessage: String?
 
+    @MainActor
     @ObservationIgnored private var toastQueue: [String] = []
+    @MainActor
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
 
     private var toastShowingDuration: Duration {
