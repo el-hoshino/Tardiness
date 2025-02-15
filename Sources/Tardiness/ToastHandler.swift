@@ -10,7 +10,7 @@ import Observation
 @Observable
 public final class ToastHandler {
     @MainActor
-    public private (set) var currentToastMessage: String?
+    public private(set) var currentToastMessage: String?
 
     @ObservationIgnored private var toastQueue: [String] = []
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
