@@ -8,8 +8,7 @@
 import SwiftUI
 import OSLog
 
-@MainActor
-public struct DisplayToastAction {
+public struct DisplayToastAction: Sendable {
     private let handler: ToastHandler?
     private let logger = Logger()
     init(handler: ToastHandler) {
@@ -18,6 +17,8 @@ public struct DisplayToastAction {
     private init() {
         self.handler = nil
     }
+
+    @MainActor
     public func callAsFunction(_ toast: String) {
         if let handler {
             handler.queueMessage(toast)
@@ -33,20 +34,11 @@ public struct DisplayToastAction {
 }
 
 extension DisplayToastAction {
-    @MainActor
     static func dummy() -> Self {
         return .init()
     }
 }
 
-public struct DisplayToastKey: EnvironmentKey {
-    @MainActor
-    public static var defaultValue: DisplayToastAction = .dummy()
-}
-
 public extension EnvironmentValues {
-    var displayToast: DisplayToastAction {
-        get { self[DisplayToastKey.self] }
-        set { self[DisplayToastKey.self] = newValue }
-    }
+    @Entry var displayToast: DisplayToastAction = .dummy()
 }
