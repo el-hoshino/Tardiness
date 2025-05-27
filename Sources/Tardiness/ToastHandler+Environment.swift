@@ -5,15 +5,16 @@
 //  Created by 史 翔新 on 2024/04/17.
 //
 
+import SwiftUI
 import Observation
 
 @Observable
 public final class ToastHandler: Sendable {
     @MainActor
-    public private(set) var currentToastMessage: String?
+    public private(set) var currentToastMessage: LocalizedStringKey?
 
     @MainActor
-    @ObservationIgnored private var toastQueue: [String] = []
+    @ObservationIgnored private var toastQueue: [LocalizedStringKey] = []
     @MainActor
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
 
@@ -28,9 +29,16 @@ public final class ToastHandler: Sendable {
     public init() {}
 
     @MainActor
-    public func queueMessage(_ message: String) {
+    public func queueMessage(_ message: LocalizedStringKey) {
         toastQueue.append(message)
         displayNextToastIfAvailable()
+    }
+
+    @_disfavoredOverload
+    @available(*, deprecated, message: "Use `queueMessage(_:)` with `LocalizedStringKey` instead.")
+    @MainActor
+    public func queueMessage(_ message: String) {
+        queueMessage(LocalizedStringKey(message))
     }
 
     @MainActor

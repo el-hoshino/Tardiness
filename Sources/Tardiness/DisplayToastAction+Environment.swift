@@ -16,7 +16,7 @@ public struct DisplayToastAction: Sendable {
     }
 
     @MainActor
-    public func callAsFunction(_ toast: String) {
+    public func callAsFunction(_ toast: LocalizedStringKey) {
         if let handler {
             handler.queueMessage(toast)
         } else {
@@ -27,6 +27,13 @@ public struct DisplayToastAction: Sendable {
             assertionFailure(errorMessage)
             logger.warning("\(errorMessage)")
         }
+    }
+
+    @_disfavoredOverload
+    @available(*, deprecated, message: "Use `callAsFunction(_:)` with `LocalizedStringKey` instead.")
+    @MainActor
+    public func callAsFunction(_ toast: String) {
+        callAsFunction(LocalizedStringKey(toast))
     }
 }
 
