@@ -11,11 +11,8 @@ import OSLog
 public struct DisplayToastAction: Sendable {
     private let handler: ToastHandler?
     private let logger = Logger()
-    init(handler: ToastHandler) {
+    init(handler: ToastHandler?) {
         self.handler = handler
-    }
-    private init() {
-        self.handler = nil
     }
 
     @MainActor
@@ -35,10 +32,12 @@ public struct DisplayToastAction: Sendable {
 
 extension DisplayToastAction {
     static func dummy() -> Self {
-        return .init()
+        return .init(handler: nil)
     }
 }
 
 public extension EnvironmentValues {
-    @Entry var displayToast: DisplayToastAction = .dummy()
+    var displayToast: DisplayToastAction {
+        .init(handler: toastHandler)
+    }
 }
