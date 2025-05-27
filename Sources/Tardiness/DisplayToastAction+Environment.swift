@@ -28,6 +28,13 @@ public struct DisplayToastAction: Sendable {
             logger.warning("\(errorMessage)")
         }
     }
+
+    @_disfavoredOverload
+    @available(*, deprecated, message: "Use `callAsFunction(_:)` with `LocalizedStringKey` instead.")
+    @MainActor
+    public func callAsFunction(_ toast: String) {
+        callAsFunction(LocalizedStringKey(toast))
+    }
 }
 
 extension DisplayToastAction {

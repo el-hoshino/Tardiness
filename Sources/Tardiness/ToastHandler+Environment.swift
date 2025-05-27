@@ -34,6 +34,13 @@ public final class ToastHandler: Sendable {
         displayNextToastIfAvailable()
     }
 
+    @_disfavoredOverload
+    @available(*, deprecated, message: "Use `queueMessage(_:)` with `LocalizedStringKey` instead.")
+    @MainActor
+    public func queueMessage(_ message: String) {
+        queueMessage(LocalizedStringKey(message))
+    }
+
     @MainActor
     public func skipCurrent(in duration: Duration) {
         removeCurrentToast()
