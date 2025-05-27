@@ -80,5 +80,5 @@ public final class ToastHandler: Sendable {
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var toastHandler: ToastHandler?
+    @Entry public internal(set) var toastHandler: ToastHandler?
 }
