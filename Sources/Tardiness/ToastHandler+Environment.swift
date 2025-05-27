@@ -68,3 +68,9 @@ public final class ToastHandler: Sendable {
         currentToastMessage = nil
     }
 }
+
+import SwiftUI
+
+extension EnvironmentValues {
+    @Entry var toastHandler: ToastHandler?
+}

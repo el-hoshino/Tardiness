@@ -17,7 +17,7 @@ public struct ToastDisplayModifier<Toast: View>: ViewModifier {
             .overlay(alignment: alignment) {
                 toastMaker(toastHandler)
             }
-            .environment(\.displayToast, .init(handler: toastHandler))
+            .environment(\.toastHandler, toastHandler)
     }
 }
 
