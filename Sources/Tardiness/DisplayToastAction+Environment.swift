@@ -16,7 +16,7 @@ public struct DisplayToastAction: Sendable {
     }
 
     @MainActor
-    public func callAsFunction(_ toast: String) {
+    public func callAsFunction(_ toast: LocalizedStringKey) {
         if let handler {
             handler.queueMessage(toast)
         } else {

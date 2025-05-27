@@ -10,10 +10,10 @@ import Observation
 @Observable
 public final class ToastHandler: Sendable {
     @MainActor
-    public private(set) var currentToastMessage: String?
+    public private(set) var currentToastMessage: LocalizedStringKey?
 
     @MainActor
-    @ObservationIgnored private var toastQueue: [String] = []
+    @ObservationIgnored private var toastQueue: [LocalizedStringKey] = []
     @MainActor
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
 
@@ -28,7 +28,7 @@ public final class ToastHandler: Sendable {
     public init() {}
 
     @MainActor
-    public func queueMessage(_ message: String) {
+    public func queueMessage(_ message: LocalizedStringKey) {
         toastQueue.append(message)
         displayNextToastIfAvailable()
     }
