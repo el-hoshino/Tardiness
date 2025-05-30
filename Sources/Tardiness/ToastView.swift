@@ -17,7 +17,7 @@ struct ToastView: View {
     public var body: some View {
         Group {
             if let toastMessage = toastHandler.currentToastMessage {
-                Text(String(localized: toastMessage))
+                Text(toastMessage)
                     .font(.caption)
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity, alignment: .leading)

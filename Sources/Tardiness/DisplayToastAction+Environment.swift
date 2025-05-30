@@ -16,9 +16,9 @@ public struct DisplayToastAction: Sendable {
     }
 
     @MainActor
-    public func callAsFunction(_ toast: String.LocalizationValue) {
+    public func callAsFunction(verbatim toast: String) {
         if let handler {
-            handler.queueMessage(toast)
+            handler.queueMessage(verbatim: toast)
         } else {
             let errorMessage = """
                 Calling DisplayToastAction with no ToastHandler. This means you forgot to set the environment.
@@ -29,6 +29,11 @@ public struct DisplayToastAction: Sendable {
         }
     }
 
+    @MainActor
+    public func callAsFunction(_ toast: String.LocalizationValue) {
+        callAsFunction(verbatim: .init(localized: toast))
+    }
+
     @_disfavoredOverload
     @available(*, deprecated, message: "Use `callAsFunction(_:)` with `String.LocalizationValue` instead.")
     @MainActor
@@ -37,10 +42,9 @@ public struct DisplayToastAction: Sendable {
     }
 
     @_disfavoredOverload
-    @available(*, deprecated, message: "Use `callAsFunction(_:)` with `String.LocalizationValue` instead.")
     @MainActor
-    public func callAsFunction(_ toast: String) {
-        callAsFunction(.init(toast))
+    public func callAsFunction<S: StringProtocol>(_ toast: S) {
+        callAsFunction(verbatim: .init(toast))
     }
 }
 

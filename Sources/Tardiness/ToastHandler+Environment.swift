@@ -10,10 +10,10 @@ import Observation
 @Observable
 public final class ToastHandler: Sendable {
     @MainActor
-    public private(set) var currentToastMessage: String.LocalizationValue?
+    public private(set) var currentToastMessage: String?
 
     @MainActor
-    @ObservationIgnored private var toastQueue: [String.LocalizationValue] = []
+    @ObservationIgnored private var toastQueue: [String] = []
     @MainActor
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
 
@@ -28,9 +28,14 @@ public final class ToastHandler: Sendable {
     public init() {}
 
     @MainActor
-    public func queueMessage(_ message: String.LocalizationValue) {
+    public func queueMessage(verbatim message: String) {
         toastQueue.append(message)
         displayNextToastIfAvailable()
+    }
+
+    @MainActor
+    public func queueMessage(_ message: String.LocalizationValue) {
+        queueMessage(verbatim: .init(localized: message))
     }
 
     @_disfavoredOverload
@@ -41,10 +46,9 @@ public final class ToastHandler: Sendable {
     }
 
     @_disfavoredOverload
-    @available(*, deprecated, message: "Use `queueMessage(_:)` with `String.LocalizationValue` instead.")
     @MainActor
-    public func queueMessage(_ message: String) {
-        queueMessage(.init(message))
+    public func queueMessage<S: StringProtocol>(_ message: S) {
+        queueMessage(verbatim: .init(message))
     }
 
     @MainActor
