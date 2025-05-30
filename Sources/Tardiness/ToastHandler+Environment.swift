@@ -10,10 +10,10 @@ import Observation
 @Observable
 public final class ToastHandler: Sendable {
     @MainActor
-    public private(set) var currentToastMessage: String.LocalizationValue?
+    public private(set) var currentToastMessage: String?
 
     @MainActor
-    @ObservationIgnored private var toastQueue: [String.LocalizationValue] = []
+    @ObservationIgnored private var toastQueue: [String] = []
     @MainActor
     @ObservationIgnored private var currentToastShowingTask: Task<Void, Never>?
 
