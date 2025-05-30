@@ -47,8 +47,8 @@ public final class ToastHandler: Sendable {
 
     @_disfavoredOverload
     @MainActor
-    public func queueMessage(_ message: String) {
-        queueMessage(verbatim: message)
+    public func queueMessage<S: StringProtocol>(_ message: S) {
+        queueMessage(verbatim: .init(message))
     }
 
     @MainActor

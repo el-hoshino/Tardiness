@@ -43,8 +43,8 @@ public struct DisplayToastAction: Sendable {
 
     @_disfavoredOverload
     @MainActor
-    public func callAsFunction(_ toast: String) {
-        callAsFunction(verbatim: toast)
+    public func callAsFunction<S: StringProtocol>(_ toast: S) {
+        callAsFunction(verbatim: .init(toast))
     }
 }
 
