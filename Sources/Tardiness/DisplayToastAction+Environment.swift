@@ -49,6 +49,27 @@ public struct DisplayToastAction: Sendable {
 }
 
 extension DisplayToastAction {
+    private var isSafeToAssert: Bool {
+        if let isInPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"], isInPreview == "1" {
+            // Is running for Xcode Previews, so assertionFailure may cause Preview crash, which is not ideal.
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private func assertionFailure(_ message: String) {
+        #if DEBUG
+        if isSafeToAssert {
+            Swift.assertionFailure(message)
+        } else {
+            print(message)
+        }
+        #endif
+    }
+}
+
+extension DisplayToastAction {
     static func dummy() -> Self {
         return .init(handler: nil)
     }
