@@ -1,5 +1,10 @@
 # Tardiness
-    
+
+![Swift 6.1+](https://img.shields.io/badge/swift-6.1%2B-F05138.svg)
+![SPM Compatible](https://img.shields.io/badge/spm-compatible-F05138.svg)
+![Platforms](https://img.shields.io/badge/platform-ios%20%7C%20macos%20%7C%20watchos%20%7C%20tvos-lightgray)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
 An easy-to-use toast displayer & handler made specifically for SwiftUI
 
 ## Why Tardiness

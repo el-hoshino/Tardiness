@@ -25,7 +25,7 @@ public extension View {
     func displayToast<Toast: View>(
         on alignment: Alignment,
         handledBy toastHandler: ToastHandler,
-        toastMaker: @escaping (ToastHandler) -> Toast
+        toastMaker: @escaping (ToastHandler) -> Toast,
     ) -> some View {
         self.modifier(
             ToastDisplayModifier(
